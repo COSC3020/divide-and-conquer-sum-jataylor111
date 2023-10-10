@@ -1,15 +1,19 @@
 function divideAndConquerSum(a) {
-    if(a.length == 1) return a[0];
-    if(a.length == 2) return a[0] + a[1];
     if(a.length == 0) {
         return 0;}
     else{
-        return SumCalc(a, a.length - 1, 0); }
+        return SumCalc(a, 0, a.length); }
 }
 
-function SumCalc(a, hi, lo) {
-    var mid = lo + (hi - lo) / 3;
-    var mid2 = mid + (hi - lo) / 3;
+function SumCalc(a, lo, hi) {
+    if (hi - lo == 1) {
+        return a[lo]; }
+    if (hi - lo == 2) {
+        return a[lo] + a[lo + 1]; }
+    
+    var thirds = Math.floor((hi - lo) / 3);
+    var mid = lo + thirds;
+    var mid2 = lo + 2 * thirds;
 
-    return SumCalc(a, mid - 1, lo) + SumCalc(a, mid2 - 1, mid + 1) + SumCalc(a, hi, mid2 + 1);
+    return (SumCalc(a, lo, mid) + SumCalc(a, mid, mid2) + SumCalc(a, mid2, hi));
 }
